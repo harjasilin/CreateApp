@@ -43,17 +43,20 @@ export const CricketScore = () => {
             setOver(updatedNumber);
         }
         if (out === 10) {
-            Alert.alert('Bengaluru loss the match')
+            Alert.alert('Bengaluru lost the match')
+            return;
+        }
+        if (over === 20) {
+            Alert.alert('Bengaluru lost the match')
             return;
         }
 
         if (score >= 160) {
-            Alert.alert("WOW Bengaluru Won the match")
+            Alert.alert(`WOW Bengaluru Won the match with ${10 - out} wicket.`)
             return;
 
         } else if (score <= finalScore || out < 10 || over < 20) {
             const randomNum = Math.floor(Math.random() * 100) + 1;
-
             const currentPlayer = players[currentPlayerIndex];
             let runsScored = 0;
 
@@ -91,6 +94,10 @@ export const CricketScore = () => {
                 [playerScores[currentPlayerIndex].score, playerScores[(currentPlayerIndex + 1) % 4].score] = [playerScores[(currentPlayerIndex + 1) % 4].score, playerScores[currentPlayerIndex].score]
                 setCurrentScore(runsScored)
             }
+            if (runsScored === 7) {
+                setCurrentScore(0)
+                setScore(score + 0);
+            }
             return;
 
         } else if (score == finalScore && out < 10 && over === 20) {
@@ -98,7 +105,7 @@ export const CricketScore = () => {
             return;
         }
         else if (score < finalScore || out === 10 || over === 20) {
-            Alert.alert('Bengaluru loss the match')
+            Alert.alert('Bengaluru lost the match')
             return;
         }
     };
