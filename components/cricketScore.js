@@ -80,7 +80,7 @@ export const CricketScore = () => {
                 updatedPlayerScores[currentPlayerIndex].score += runsScored;
                 setPlayerScores(updatedPlayerScores);
             }
-            if (runsScored % 2 !== 0) {
+            if (runsScored % 2 !== 0&& runsScored<6) {
                 [playerScores[currentPlayerIndex].playerName, playerScores[(currentPlayerIndex + 1) % 4].playerName] = [playerScores[(currentPlayerIndex + 1) % 4].playerName, playerScores[currentPlayerIndex].playerName];
                 [playerScores[currentPlayerIndex].score, playerScores[(currentPlayerIndex + 1) % 4].score] = [playerScores[(currentPlayerIndex + 1) % 4].score, playerScores[currentPlayerIndex].score]
                 setCurrentScore(runsScored)
@@ -88,6 +88,9 @@ export const CricketScore = () => {
             if (runsScored === 7) {
                 setCurrentScore(0)
                 setScore(score + 0);
+                const updatedPlayerScores = [...playerScores];
+                updatedPlayerScores[currentPlayerIndex].score += 0;
+                setPlayerScores(updatedPlayerScores);
             }
             return;
 
