@@ -6,6 +6,7 @@ export const CricketScore = () => {
     const [score, setScore] = useState(120)
     const [finalScore, setFinalScore] = useState(159)
     const [over, setOver] = useState(16)
+    const [ball, setBall] = useState(0)
     const [out, setOut] = useState(7)
     const [currentPlayerIndex, setCurrentPlayerIndex] = useState(0);
     const [currentScore, setCurrentScore] = useState(1)
@@ -25,22 +26,12 @@ export const CricketScore = () => {
 
     const handleBowl = () => {
         if (over < 20) {
-            let updatedNumber = over;
-            if (updatedNumber == 16.5) {
-                updatedNumber = 17;
-            } else if (updatedNumber == 17.5) {
-                updatedNumber = 18;
+            if (ball < 5) {
+                setBall(ball + 1);
+            } else {
+                setBall(0);
+                setOver(over + 1);
             }
-            else if (updatedNumber == 18.5) {
-                updatedNumber = 19;
-            } else if (updatedNumber == 19.5) {
-                updatedNumber = 20;
-            }
-
-            else {
-                updatedNumber = parseFloat((updatedNumber + 0.1).toFixed(1));
-            }
-            setOver(updatedNumber);
         }
         if (out === 10) {
             Alert.alert('Bengaluru lost the match')
@@ -127,9 +118,10 @@ export const CricketScore = () => {
                         <Text style={styles.scorestyle}>
                             Overs:
                         </Text>
-                        <Text style={styles.scorestyle}>
-                            {over}
-                        </Text>
+                        {ball === 0 ?
+                            (<Text style={styles.scorestyle}>{over}</Text>) :
+                            (<Text style={styles.scorestyle}>{over}.{ball}</Text>)}
+
                     </View>
                 </View>
                 <View style={{ alignItems: 'center' }}>
